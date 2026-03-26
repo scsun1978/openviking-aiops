@@ -185,8 +185,24 @@
   },
   "active": "e62f423a6ff5aca9",
   "lastOpenFiles": [
-    "scripts/push-to-github.sh",
-    "scripts",
+    "README.md",
+    "tasks/DEV-OV-005.md",
+    "templates/任务模板.md",
+    "templates/openclaw-任务下发模板.md",
+    "templates/claude-code-执行模板.md",
+    "templates/README.md",
+    "templates/ADR-模板.md",
+    "templates",
+    "scripts/train",
+    "scripts/monitor",
+    "scripts/deploy",
+    "src/network-monitoring/tests",
+    "src/network-monitoring/config",
+    "src/network-monitoring/app",
+    "src/monitoring/prometheus",
+    "src/monitoring/loki",
+    "src/monitoring/grafana",
+    "prompts/openviking-aiops-continue-development.md",
     "prompts/openviking-aiops-development.md",
     "tasks/DEV-OV-003.md",
     "docs/20-需求分析.md",
@@ -204,8 +220,6 @@
     "docs/31-DEV-OV-003-阶段3核心模块架构设计报告.md",
     "docs/21-阶段1只读分析报告.md",
     "docs/16-AIDevVault框架应用分析.md",
-    "docs/14-完整项目开发How-To.md",
-    "docs/02-研发架构.md",
-    "docs/01-项目总览.md"
+    "docs/14-完整项目开发How-To.md"
   ]
 }
