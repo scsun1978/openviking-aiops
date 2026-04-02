@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Network Monitoring Service
+  network-monitor:
+    build: ./src/network-monitoring
+    container_name: network-monitor
+    ports:
+      - "9091:9091"
+    environment:
+      - PROMETHEUS_ENABLED=true
+      - PROMETHEUS_PORT=9091
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./src/network-monitoring/config:/app/config
+      - ./src/network-monitoring/logs:/app/logs
+    restart: unless-stopped
+    network_mode: "bridge"
+
+  # Prometheus (for local testing)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus-test
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./src/monitoring/prometheus/prometheus-local.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    depends_on:
+      - network-monitor
+    restart: unless-stopped
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  prometheus-data:

@@ -1,0 +1,11 @@
+# Prometheus configuration for local testing
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'network-monitor'
+    static_configs:
+      - targets: ['network-monitor:9091']
+    metrics_path: '/metrics'

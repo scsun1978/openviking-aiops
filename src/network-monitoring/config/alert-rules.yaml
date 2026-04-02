@@ -1,0 +1,118 @@
+# Alert Rules Configuration
+
+rules:
+  # CPU high usage alert
+  - name: cpu_high_usage
+    enabled: true
+    severity: critical
+    message: "CPU usage is too high"
+    labels:
+      service: "system"
+      metric: "cpu"
+    aggregator: AND
+    suppress_duration: 300  # 5 minutes
+    group_by: ["host"]
+    conditions:
+      - metric: "cpu_usage_ratio"
+        operator: ">"
+        threshold: 0.8  # 80%
+        duration: 60  # 1 minute
+
+  # Memory high usage alert
+  - name: memory_high_usage
+    enabled: true
+    severity: warning
+    message: "Memory usage is high"
+    labels:
+      service: "system"
+      metric: "memory"
+    aggregator: AND
+    suppress_duration: 300
+    conditions:
+      - metric: "memory_usage_ratio"
+        operator: ">"
+        threshold: 0.85  # 85%
+        duration: 60
+
+  # Disk high usage alert
+  - name: disk_high_usage
+    enabled: true
+    severity: critical
+    message: "Disk usage is critical"
+    labels:
+      service: "system"
+      metric: "disk"
+    aggregator: AND
+    suppress_duration: 300
+    conditions:
+      - metric: "disk_usage_ratio"
+        operator: ">"
+        threshold: 0.9  # 90%
+        duration: 120  # 2 minutes
+
+  # Network high latency alert
+  - name: network_high_latency
+    enabled: true
+    severity: warning
+    message: "Network latency is high"
+    labels:
+      service: "network"
+      metric: "latency"
+    aggregator: AND
+    suppress_duration: 180
+    conditions:
+      - metric: "network_ping_latency_ms"
+        operator: ">"
+        threshold: 100  # 100ms
+        duration: 30
+
+  # Network packet loss alert
+  - name: network_packet_loss
+    enabled: true
+    severity: critical
+    message: "Network packet loss detected"
+    labels:
+      service: "network"
+      metric: "packet_loss"
+    aggregator: AND
+    suppress_duration: 180
+    conditions:
+      - metric: "network_packet_loss_ratio"
+        operator: ">"
+        threshold: 0.05  # 5%
+        duration: 60
+
+  # Device temperature high alert
+  - name: device_temperature_high
+    enabled: true
+    severity: warning
+    message: "Device temperature is high"
+    labels:
+      service: "system"
+      metric: "temperature"
+    aggregator: AND
+    suppress_duration: 300
+    conditions:
+      - metric: "device_temperature_celsius"
+        operator: ">"
+        threshold: 80  # 80°C
+        duration: 60
+
+  # Multiple conditions example
+  - name: system_overloaded
+    enabled: true
+    severity: critical
+    message: "System is overloaded (CPU and Memory both high)"
+    labels:
+      service: "system"
+    aggregator: AND
+    suppress_duration: 300
+    conditions:
+      - metric: "cpu_usage_ratio"
+        operator: ">"
+        threshold: 0.9
+        duration: 60
+      - metric: "memory_usage_ratio"
+        operator: ">"
+        threshold: 0.9
+        duration: 60
